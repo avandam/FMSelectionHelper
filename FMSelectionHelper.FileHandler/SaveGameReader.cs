@@ -239,7 +239,9 @@ namespace FMSelectionHelper.FileHandler
             TransferStatus loanStatus = ParseTransferStatus(playerInformation[header["Loan Status"]].Trim().ToLower());
             string askingPrice = playerInformation[header["AP"]].Trim();
             int squadNumber = playerInformation[header["No."]].Trim() == "-" ? -1 : Convert.ToInt32(playerInformation[header["No."]].Trim());
-            return new PlayerDetails(rightFoot, leftFoot, transferStatus, loanStatus, askingPrice, squadNumber);
+            int currentAbility = Convert.ToInt32(playerInformation[header["CA"]].Trim());
+            int potentialAbility = Convert.ToInt32(playerInformation[header["PA"]].Trim());
+            return new PlayerDetails(rightFoot, leftFoot, transferStatus, loanStatus, askingPrice, squadNumber, currentAbility, potentialAbility);
         }
 
         private FootSkill ParseFootSkill(string value)

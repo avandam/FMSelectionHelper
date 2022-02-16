@@ -15,8 +15,10 @@ namespace FMSelectionHelper.Models
         public TransferStatus LoanStatus { get; }
         public string AskingPrice { get; }
         public int SquadNumber { get; }
+        public int CurrentAbility { get; }
+        public int PotentialAbility { get; }
 
-        public PlayerDetails(FootSkill rightFoot, FootSkill leftFoot, TransferStatus transferStatus, TransferStatus loanStatus, string askingPrice, int squadNumber)
+        public PlayerDetails(FootSkill rightFoot, FootSkill leftFoot, TransferStatus transferStatus, TransferStatus loanStatus, string askingPrice, int squadNumber, int currentAbility, int potentialAbility)
         {
             RightFoot = rightFoot;
             LeftFoot = leftFoot;
@@ -24,6 +26,8 @@ namespace FMSelectionHelper.Models
             LoanStatus = loanStatus;
             AskingPrice = askingPrice;
             SquadNumber = squadNumber;
+            CurrentAbility = currentAbility;
+            PotentialAbility = potentialAbility;
         }
     }
 }
