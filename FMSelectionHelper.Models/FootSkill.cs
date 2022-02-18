@@ -1,4 +1,4 @@
-﻿namespace FMSelectionHelper.Infra
+﻿namespace FMSelectionHelper.Models
 {
     public enum FootSkill
     {

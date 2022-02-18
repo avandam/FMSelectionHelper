@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FMSelectionHelper.Models
+﻿namespace FMSelectionHelper.Models
 {
     public class RoleScore
     {
@@ -37,7 +31,7 @@ namespace FMSelectionHelper.Models
                 keyScore += playerAttributes.First(a => a.Key.Abbreviation == attribute.Abbreviation).Value;
             }
 
-            keyScore /= (double)nrOfKeyAttributes;
+            keyScore /= nrOfKeyAttributes;
 
             preferableScore = 0.0;
             int nrOfPreferableAttributes = Role.PreferableAttributes.Count;
@@ -46,7 +40,7 @@ namespace FMSelectionHelper.Models
                 preferableScore += playerAttributes.First(a => a.Key.Abbreviation == attribute.Abbreviation).Value;
             }
 
-            preferableScore /= (double)nrOfPreferableAttributes;
+            preferableScore /= nrOfPreferableAttributes;
 
             Score = Math.Round((keyScore * 2 + preferableScore) / 3, 2);
         }

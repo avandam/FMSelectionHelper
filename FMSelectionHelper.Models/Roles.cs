@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using FMSelectionHelper.Infra;
-
-namespace FMSelectionHelper.Models
+﻿namespace FMSelectionHelper.Models
 {
     public sealed class Roles
     {
-        private static readonly Roles instance = new Roles();
-        public static Roles Instance => instance;
+        public static Roles Instance { get; } = new Roles();
 
         private List<Role> roles = new List<Role>();
 

@@ -1,4 +1,5 @@
-﻿namespace FMSelectionHelper.Infra
+﻿// ReSharper disable InconsistentNaming
+namespace FMSelectionHelper.Models
 {
     public enum Position
     {

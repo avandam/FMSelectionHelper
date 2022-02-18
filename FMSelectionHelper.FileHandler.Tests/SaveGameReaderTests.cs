@@ -1,11 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FMSelectionHelper.FileHandler;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FMSelectionHelper.Infra;
 using FMSelectionHelper.Models;
 
 namespace FMSelectionHelper.FileHandler.Tests
@@ -33,7 +27,7 @@ namespace FMSelectionHelper.FileHandler.Tests
         }
 
         [TestMethod]
-        public void ParsePositionsDWBRLTest()
+        public void ParsePositionsDwbrlTest()
         {
             SaveGameReader reader = new SaveGameReader();
             List<Position> positions = reader.ParsePositions("D/WB (RL)");
@@ -46,7 +40,7 @@ namespace FMSelectionHelper.FileHandler.Tests
         }
 
         [TestMethod]
-        public void ParsePositionsDcDMMcTest()
+        public void ParsePositionsDcDmMcTest()
         {
             SaveGameReader reader = new SaveGameReader();
             List<Position> positions = reader.ParsePositions("D (C), DM, M (C)");

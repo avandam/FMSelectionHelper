@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FMSelectionHelper.Models
+﻿namespace FMSelectionHelper.Models
 {
     // Create Singleton
     public sealed class Attributes
     {
+        // ReSharper disable once InconsistentNaming
         private static readonly Attributes instance = new Attributes();
 
         static Attributes()

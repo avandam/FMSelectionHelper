@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FMSelectionHelper.Business;
 using FMSelectionHelper.Models;
 using Microsoft.Win32;
@@ -21,9 +11,11 @@ namespace FMSelectionHelper
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    // ReSharper disable once UnusedMember.Global
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class MainWindow : Window
     {
-        private string sortPosition = String.Empty;
+        private string sortPosition = string.Empty;
         private readonly PlayerService playerService = new PlayerService();
         private List<Player> players = new List<Player>();
         public MainWindow()
@@ -45,8 +37,8 @@ namespace FMSelectionHelper
         private void PlayersViewColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             List<Player> orderedPlayers;
-            GridViewColumnHeader column = (sender as GridViewColumnHeader);
-            string sortBy = column.Tag.ToString();
+            GridViewColumnHeader? column = (sender as GridViewColumnHeader);
+            string sortBy = column?.Tag.ToString() ?? string.Empty;
             if (sortBy == sortPosition)
             {
                 PlayersView.ItemsSource = players;

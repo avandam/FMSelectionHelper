@@ -1,16 +1,10 @@
-﻿using FMSelectionHelper.Infra;
-using FMSelectionHelper.Models;
+﻿using FMSelectionHelper.Models;
 using Attribute = FMSelectionHelper.Models.Attribute;
 
 namespace FMSelectionHelper.FileHandler
 {
     public class SaveGameReader
     {
-        public SaveGameReader()
-        {
-            
-        }
-
         public List<Player> ParseFile(string path)
         {
             List<Player> players = new List<Player>();
@@ -21,7 +15,6 @@ namespace FMSelectionHelper.FileHandler
                          .ToList();
 
             // Parse header
-            string headerLine = lines[0];
             string[] headerLineParts = lines[0].Split('|').ToList().Where(headerPart => headerPart != string.Empty).ToArray();
             Dictionary<string, int> header = new Dictionary<string, int>();
             for (int i = 0; i < headerLineParts.Length; i++)

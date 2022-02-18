@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using FMSelectionHelper.Infra;
+
+// ReSharper disable InconsistentNaming
 
 namespace FMSelectionHelper.Models
 {
