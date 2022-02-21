@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
 using FMSelectionHelper.Models;
 
 namespace FMSelectionHelper.FileHandler.Tests
@@ -14,6 +15,18 @@ namespace FMSelectionHelper.FileHandler.Tests
             List<Player> players = saveGameReader.ParseFile("test.rtf");
 
             Assert.AreEqual(99, players.Count);
+            Assert.AreEqual(14, players[0].Attributes.First(attribute => attribute.Key.Abbreviation == "Wor").Value);
+        }
+
+        [TestMethod()]
+        public void ParseFile2Test()
+        {
+            SaveGameReader saveGameReader = new SaveGameReader();
+            List<Player> players = saveGameReader.ParseFile("test2.rtf");
+
+            Assert.AreEqual(26, players.Count);
+            Assert.AreEqual(-1, players[0].ContractEndYear);
+            Assert.AreEqual(3, players[0].Attributes.First(attribute => attribute.Key.Abbreviation == "Wor").Value);
         }
 
         [TestMethod]

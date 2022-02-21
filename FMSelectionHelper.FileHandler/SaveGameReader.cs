@@ -25,6 +25,8 @@ namespace FMSelectionHelper.FileHandler
                 }
             }
 
+            int firstAttributeIndex = header.ContainsKey("PA") ? 17 : 14;
+
             // Parse individual players
             lines.RemoveAt(0);
             foreach (string line in lines)
@@ -32,10 +34,15 @@ namespace FMSelectionHelper.FileHandler
                 string[] playerInformation = line.Split('|').ToList().Where(currentLine => currentLine != string.Empty).ToArray();
                 string name = playerInformation[header["Name"]].Trim();
                 int age = Convert.ToInt32(playerInformation[header["Age"]].Trim());
-                int contractEndYear = Convert.ToInt32(playerInformation[header["Expires"]].Trim().Substring(playerInformation[header["Expires"]].Trim().Length - 4));
+                string contractInfo = playerInformation[header["Expires"]].Trim();
+                int contractEndYear = -1;
+                if (contractInfo != "-")
+                {
+                    contractEndYear = Convert.ToInt32(contractInfo.Substring(contractInfo.Length - 4));
+                }
 
                 PlayerDetails playerDetails = ParsePlayerDetails(playerInformation, header);
-                Dictionary<Attribute, int> attributes = ParseAttributes(playerInformation, header);
+                Dictionary<Attribute, int> attributes = ParseAttributes(playerInformation, header, firstAttributeIndex);
                 List<Position> positions = ParsePositions(playerInformation[header["Position"]].Trim());
 
                 Player player = new Player(name, age, contractEndYear, playerDetails, attributes, positions);
@@ -209,11 +216,10 @@ namespace FMSelectionHelper.FileHandler
             return positions;
         }
 
-        private Dictionary<Attribute, int> ParseAttributes(string[] playerInformation, Dictionary<string, int> header)
+        private Dictionary<Attribute, int> ParseAttributes(string[] playerInformation, Dictionary<string, int> header, int firstIndex)
         {
             Dictionary<Attribute, int> attributes = new Dictionary<Attribute, int>();
-            // Fixed: index 17 - 76
-            for (int i = 17; i <= 76; i++)
+            for (int i = firstIndex; i < header.Count - 1; i++)
             {
 
                 Attribute attribute = Attributes.Instance.GetAttribute(header.ElementAt(i).Key);
@@ -230,10 +236,21 @@ namespace FMSelectionHelper.FileHandler
             FootSkill leftFoot = ParseFootSkill(playerInformation[header["Left Foot"]].Trim().ToLower());
             TransferStatus transferStatus = ParseTransferStatus(playerInformation[header["Transfer Status"]].Trim().ToLower());
             TransferStatus loanStatus = ParseTransferStatus(playerInformation[header["Loan Status"]].Trim().ToLower());
-            string askingPrice = playerInformation[header["AP"]].Trim();
             int squadNumber = playerInformation[header["No."]].Trim() == "-" ? -1 : Convert.ToInt32(playerInformation[header["No."]].Trim());
-            int currentAbility = Convert.ToInt32(playerInformation[header["CA"]].Trim());
-            int potentialAbility = Convert.ToInt32(playerInformation[header["PA"]].Trim());
+            string askingPrice = "Unknown";
+            int currentAbility = -1;
+            int potentialAbility = -1;
+
+            try
+            {
+                askingPrice = playerInformation[header["AP"]].Trim();
+                currentAbility = Convert.ToInt32(playerInformation[header["CA"]].Trim());
+                potentialAbility = Convert.ToInt32(playerInformation[header["PA"]].Trim());
+            }
+            catch 
+            {
+                Console.WriteLine("Info not available");
+            }
             return new PlayerDetails(rightFoot, leftFoot, transferStatus, loanStatus, askingPrice, squadNumber, currentAbility, potentialAbility);
         }
 
