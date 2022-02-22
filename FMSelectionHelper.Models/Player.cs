@@ -19,6 +19,8 @@ namespace FMSelectionHelper.Models
 
         public List<RoleScore> RoleScores { get; }
 
+        public double GlobalScore { get; private set; }
+
         public Player(string name, int age, int contractEndYear, PlayerDetails playerDetails, Dictionary<Attribute, int> attributes, List<Position> positions)
         {
             Name = name;
@@ -49,6 +51,8 @@ namespace FMSelectionHelper.Models
                     RoleScores.Add(new RoleScore(position));
                 }
             }
+
+            GlobalScore = Math.Round(attributes.Average(attribute => attribute.Value), 2);
         }
 
         private bool CanPlayAtPosition(RoleType roleType)

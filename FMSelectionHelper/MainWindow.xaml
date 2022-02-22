@@ -82,6 +82,11 @@
                             <GridViewColumnHeader Tag="Pos10" Click="PlayersViewColumnHeader_Click">ST</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=GlobalScore}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Click="PlayersViewColumnHeader_Click" ToolTip="Average over all attributes">Total</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
