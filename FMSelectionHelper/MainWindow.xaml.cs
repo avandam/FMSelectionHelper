@@ -53,7 +53,12 @@ namespace FMSelectionHelper
         private void PlayersViewColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader? column = (sender as GridViewColumnHeader);
-            string sortBy = column?.Tag.ToString() ?? string.Empty;
+            string sortBy = string.Empty;
+            if (column?.Tag != null)
+            {
+                sortBy = column?.Tag.ToString() ?? string.Empty;
+            }
+
             if (sortBy == sortPosition)
             {
                 PlayersView.ItemsSource = players;
