@@ -36,7 +36,7 @@ namespace FMSelectionHelper.FileHandler.Tests
             List<Position> positions = reader.ParsePositions("GK");
 
             Assert.AreEqual(1, positions.Count);
-            Assert.AreEqual(Position.GK, positions[0]);
+            Assert.AreEqual(PositionType.GK, positions[0].PositionType);
         }
 
         [TestMethod]
@@ -46,10 +46,10 @@ namespace FMSelectionHelper.FileHandler.Tests
             List<Position> positions = reader.ParsePositions("D/WB (RL)");
 
             Assert.AreEqual(4, positions.Count);
-            CollectionAssert.Contains(positions, Position.DL);
-            CollectionAssert.Contains(positions, Position.DR);
-            CollectionAssert.Contains(positions, Position.WBL);
-            CollectionAssert.Contains(positions, Position.WBR);
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.DL));
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.DR));
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.WBL));
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.WBR));
         }
 
         [TestMethod]
@@ -58,10 +58,14 @@ namespace FMSelectionHelper.FileHandler.Tests
             SaveGameReader reader = new SaveGameReader();
             List<Position> positions = reader.ParsePositions("D (C), DM, M (C)");
 
-            Assert.AreEqual(3, positions.Count);
-            CollectionAssert.Contains(positions, Position.DC);
-            CollectionAssert.Contains(positions, Position.DM);
-            CollectionAssert.Contains(positions, Position.MC);
+            Assert.AreEqual(7, positions.Count);
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.DC));
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.DCR));
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.DCL));
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.DM));
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.MC));
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.MCR));
+            Assert.IsTrue(positions.Any(position => position.PositionType == PositionType.MCL));
         }
 
     }

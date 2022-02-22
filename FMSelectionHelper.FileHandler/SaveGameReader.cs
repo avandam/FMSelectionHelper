@@ -50,7 +50,6 @@ namespace FMSelectionHelper.FileHandler
             }
 
             return players;
-
         }
 
         public List<Position> ParsePositions(string positionsRaw)
@@ -79,17 +78,17 @@ namespace FMSelectionHelper.FileHandler
 
             if (positionToParse == "GK")
             {
-                positions.Add(Position.GK);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.GK));
                 return positions;
             }
             if (positionToParse == "ST (C)")
             {
-                positions.Add(Position.ST);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.ST));
                 return positions;
             }
             if (positionToParse == "DM")
             {
-                positions.Add(Position.DM);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.DM));
                 return positions;
             }
 
@@ -106,7 +105,7 @@ namespace FMSelectionHelper.FileHandler
 
                 return positions;
             }
-            
+
             positions.AddRange(ParseComplexPosition(position, side));
 
             return positions;
@@ -129,9 +128,8 @@ namespace FMSelectionHelper.FileHandler
             else if (positionRaw == "AM")
             {
                 return ParseAttackingMidfielders(side);
-
             }
-            else 
+            else
             {
                 throw new ArgumentException("position could not be parsed");
             }
@@ -142,17 +140,17 @@ namespace FMSelectionHelper.FileHandler
             List<Position> positions = new List<Position>();
             if (side.Contains('L'))
             {
-                positions.Add(Position.AML);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.AML));
             }
 
             if (side.Contains('C'))
             {
-                positions.Add(Position.AMC);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.AMC));
             }
 
             if (side.Contains('R'))
             {
-                positions.Add(Position.AMR);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.AMR));
             }
 
             return positions;
@@ -163,17 +161,19 @@ namespace FMSelectionHelper.FileHandler
             List<Position> positions = new List<Position>();
             if (side.Contains('L'))
             {
-                positions.Add(Position.ML);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.ML));
             }
 
             if (side.Contains('C'))
             {
-                positions.Add(Position.MC);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.MC));
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.MCR));
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.MCL));
             }
 
             if (side.Contains('R'))
             {
-                positions.Add(Position.MR);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.MR));
             }
 
             return positions;
@@ -184,12 +184,14 @@ namespace FMSelectionHelper.FileHandler
             List<Position> positions = new List<Position>();
             if (side.Contains('L'))
             {
-                positions.Add(Position.WBL);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.WBL));
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.DL));
             }
 
             if (side.Contains('R'))
             {
-                positions.Add(Position.WBR);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.WBR));
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.DR));
             }
 
             return positions;
@@ -200,17 +202,21 @@ namespace FMSelectionHelper.FileHandler
             List<Position> positions = new List<Position>();
             if (side.Contains('L'))
             {
-                positions.Add(Position.DL);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.DL));
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.WBL));
             }
 
             if (side.Contains('C'))
             {
-                positions.Add(Position.DC);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.DC));
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.DCR));
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.DCL));
             }
 
             if (side.Contains('R'))
             {
-                positions.Add(Position.DR);
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.DR));
+                positions.Add(PositionCollection.Instance.GetPosition(PositionType.WBR));
             }
 
             return positions;
@@ -222,7 +228,7 @@ namespace FMSelectionHelper.FileHandler
             for (int i = firstIndex; i < header.Count - 1; i++)
             {
 
-                Attribute attribute = Attributes.Instance.GetAttribute(header.ElementAt(i).Key);
+                Attribute attribute = AttributeCollection.Instance.GetAttribute(header.ElementAt(i).Key);
                 int attributeValue = Convert.ToInt32(playerInformation[i]);
                 attributes.Add(attribute, attributeValue);
             }

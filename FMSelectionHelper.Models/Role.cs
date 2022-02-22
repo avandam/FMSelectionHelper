@@ -1,22 +1,26 @@
 ﻿namespace FMSelectionHelper.Models
 {
-    public  class Role
-    {
-        public string Name { get; }
-        public string ShortName { get; }
-        public List<Position> Positions { get; }
-        public int Index { get; }
-        public List<Attribute> KeyAttributes { get; }
-        public List<Attribute> PreferableAttributes { get; }
 
-        public Role(string name, string shortName, List<Position> positions, int index, List<Attribute> keyAttributes, List<Attribute> preferableAttributes)
+    public class Role
+    {
+        public RoleType RoleType { get; }
+        public Duty Duty { get; }
+        private readonly List<Attribute> keyAttributes;
+        public IReadOnlyCollection<Attribute> KeyAttributes => keyAttributes.AsReadOnly();
+        private readonly List<Attribute> preferableAttributes;
+        public IReadOnlyCollection<Attribute> PreferableAttributes => preferableAttributes.AsReadOnly();
+
+        public Role(RoleType roleType, Duty duty, List<Attribute> keyAttributes, List<Attribute> preferableAttributes)
         {
-            Name = name;
-            ShortName = shortName;
-            Positions = positions;
-            Index = index;
-            KeyAttributes = keyAttributes;
-            PreferableAttributes = preferableAttributes;
+            RoleType = roleType;
+            Duty = duty;
+            this.keyAttributes = keyAttributes;
+            this.preferableAttributes = preferableAttributes;
+        }
+
+        public override string ToString()
+        {
+            return RoleType.ToDescriptionString() + " " + Duty.ToDescriptionString();
         }
     }
 }

@@ -16,6 +16,8 @@ First prepare FM for use:
 	- Select the ForExportFull.fmf file
 - Use the "FM Files\4231 example tactic.fmf" as your formation
 
+In the Formation class a different Formation can be created. In the future this will be interactive in the application.
+
 Create the file to use in the tool:
 
 - Go to Squad

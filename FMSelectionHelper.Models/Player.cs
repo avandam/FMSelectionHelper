@@ -13,61 +13,11 @@ namespace FMSelectionHelper.Models
 
         private readonly Dictionary<Attribute, int> attributes;
         public IReadOnlyDictionary<Attribute, int> Attributes => new ReadOnlyDictionary<Attribute, int>(attributes);
+
         private readonly List<Position> positions;
         public IReadOnlyCollection<Position> Positions => positions.AsReadOnly();
 
-        public List<RoleScore> RoleScores = new List<RoleScore>();
-
-        public double GkScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "GK").Score; }
-        }
-
-        public double DLScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "DL").Score; }
-        }
-
-        public double DCScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "DC").Score; }
-        }
-
-        public double DRScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "DR").Score; }
-        }
-
-        public double DLPScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "DLP").Score; }
-        }
-
-        public double BBMScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "BBM").Score; }
-        }
-
-        public double AMLScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "AML").Score; }
-        }
-
-        public double AMCScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "AMC").Score; }
-        }
-
-        public double AMRScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "AMR").Score; }
-        }
-
-        public double STScore
-        {
-            get { return RoleScores.First(roleScore => roleScore.Name == "ST").Score; }
-        }
-
+        public List<RoleScore> RoleScores { get; }
 
         public Player(string name, int age, int contractEndYear, PlayerDetails playerDetails, Dictionary<Attribute, int> attributes, List<Position> positions)
         {
@@ -77,21 +27,41 @@ namespace FMSelectionHelper.Models
             PlayerDetails = playerDetails;
             this.attributes = attributes;
             this.positions = positions;
+            RoleScores = new List<RoleScore>();
         }
 
-        public void ComputeScores()
+        public double GetRoleScore(int index)
         {
-            foreach (Role role in Roles.Instance.GetAllRoles())
+            return RoleScores.First(roleScore => roleScore.Position.Index == index).Score;
+        }
+
+        public void ComputeScores(Formation formation)
+        {
+            RoleScores.Clear();
+            foreach (var position in formation.Selection)
             {
-                if (positions.Intersect(role.Positions).Any())
+                if (CanPlayAtPosition(position.Role.RoleType))
                 {
-                    RoleScores.Add(new RoleScore(role, Attributes));
+                    RoleScores.Add(new RoleScore(position, attributes));
                 }
                 else
                 {
-                    RoleScores.Add(new RoleScore(role));
+                    RoleScores.Add(new RoleScore(position));
                 }
             }
+        }
+
+        private bool CanPlayAtPosition(RoleType roleType)
+        {
+            foreach (var position in positions)
+            {
+                if (position.IsRoleValid(roleType))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

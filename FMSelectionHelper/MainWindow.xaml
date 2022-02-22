@@ -8,6 +8,7 @@
         Title="FM Selection Helper" Height="600" Width="1000" DataContext="{Binding ElementName=players}">
     <Window.Resources>
         <local:ScoreConverter x:Key="ScoreConverter" />
+        <local:AbilityConverter x:Key="AbilityConverter" />
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,60 +21,65 @@
         <Button Grid.Column="0" Grid.Row="0" Content="Load Squad" HorizontalAlignment="Left" Margin="29,30,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.068,-0.461" Click="Button_Click"/>
         <ListView Grid.Column="0" Grid.Row="1" Name="PlayersView">
             <ListView.View>
-                <GridView>
+                <GridView x:Name="PlayerGrid">
                     <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding Path=Name}"/>
                     <GridViewColumn Header="Age" Width="50" DisplayMemberBinding="{Binding Path=Age}"/>
                     <GridViewColumn Header="Ctr" Width="50" DisplayMemberBinding="{Binding Path=ContractEndYear}"/>
-                    <GridViewColumn Header="Ca" Width="50" DisplayMemberBinding="{Binding Path=PlayerDetails.CurrentAbility}" />
-                    <GridViewColumn Header="Pa" Width="50" DisplayMemberBinding="{Binding Path=PlayerDetails.PotentialAbility}" />
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=GkScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Header="Ca" Width="50" DisplayMemberBinding="{Binding Path=PlayerDetails.CurrentAbility, Converter={StaticResource AbilityConverter}}"/>
+                    <GridViewColumn Header="Pa" Width="50" DisplayMemberBinding="{Binding Path=PlayerDetails.PotentialAbility, Converter={StaticResource AbilityConverter}}" />
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[0].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="GK" Click="PlayersViewColumnHeader_Click">GK</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos0" Click="PlayersViewColumnHeader_Click">GK</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=DLScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[1].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="DL" Click="PlayersViewColumnHeader_Click">DL</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos1" Click="PlayersViewColumnHeader_Click">DL</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=DCScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[2].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="DC" Click="PlayersViewColumnHeader_Click">DC</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos2" Click="PlayersViewColumnHeader_Click">DCL</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=DRScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[3].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="DR" Click="PlayersViewColumnHeader_Click">DR</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos3" Click="PlayersViewColumnHeader_Click">DCR</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=DLPScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[4].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="DLP" Click="PlayersViewColumnHeader_Click">DLP</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos4" Click="PlayersViewColumnHeader_Click">DR</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=BBMScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[5].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="BBM" Click="PlayersViewColumnHeader_Click">BBM</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos5" Click="PlayersViewColumnHeader_Click">MCL</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=AMLScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[6].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="AML" Click="PlayersViewColumnHeader_Click">AML</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos6" Click="PlayersViewColumnHeader_Click">MCR</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=AMCScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[7].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="AMC" Click="PlayersViewColumnHeader_Click">AMC</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos7" Click="PlayersViewColumnHeader_Click">AML</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=AMRScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[8].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="AMR" Click="PlayersViewColumnHeader_Click">AMR</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos8" Click="PlayersViewColumnHeader_Click">AMC</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=STScore, Converter={StaticResource ScoreConverter}}">
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[9].Score, Converter={StaticResource ScoreConverter}}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Tag="ST" Click="PlayersViewColumnHeader_Click">ST</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Pos9" Click="PlayersViewColumnHeader_Click">AMR</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=RoleScores[10].Score, Converter={StaticResource ScoreConverter}}">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Pos10" Click="PlayersViewColumnHeader_Click">ST</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                 </GridView>

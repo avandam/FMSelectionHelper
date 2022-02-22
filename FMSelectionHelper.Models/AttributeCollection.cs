@@ -1,25 +1,22 @@
-﻿namespace FMSelectionHelper.Models
+﻿// ReSharper disable StringLiteralTypo
+namespace FMSelectionHelper.Models
 {
-    // Create Singleton
-    public sealed class Attributes
+    public sealed class AttributeCollection
     {
-        // ReSharper disable once InconsistentNaming
-        private static readonly Attributes instance = new Attributes();
-
-        static Attributes()
+        static AttributeCollection()
         {
 
         }
 
-        private Attributes()
+        private AttributeCollection()
         {
             attributes = new List<Attribute>();
             FillAttributes();
         }
 
-        public static Attributes Instance => instance;
+        public static AttributeCollection Instance { get; } = new AttributeCollection();
 
-        private List<Attribute> attributes;
+        private readonly List<Attribute> attributes;
 
         private void FillAttributes()
         {
@@ -70,6 +67,7 @@
             attributes.Add(new Attribute("Agg", "Aggression", false));
             attributes.Add(new Attribute("Aer", "Aerial Reach", false));
             attributes.Add(new Attribute("Acc", "Acceleration", false));
+
             attributes.Add(new Attribute("Vers", "Versatility", true));
             attributes.Add(new Attribute("Temp", "Temperament", true));
             attributes.Add(new Attribute("Spor", "Sportmanship", true));

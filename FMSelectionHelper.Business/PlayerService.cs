@@ -9,9 +9,10 @@ namespace FMSelectionHelper.Business
         {
             SaveGameReader reader = new SaveGameReader();
             List<Player> players = reader.ParseFile(path);
+            Formation formation = new Formation();
             foreach (Player player in players)
             {
-                player.ComputeScores();
+                player.ComputeScores(formation);
             }
             return players;
         }
