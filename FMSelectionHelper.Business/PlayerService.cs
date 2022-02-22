@@ -5,11 +5,10 @@ namespace FMSelectionHelper.Business
 {
     public class PlayerService
     {
-        public List<Player> GetPlayersFromSquad(string path)
+        public List<Player> GetPlayersFromSquad(string path, Formation formation)
         {
             SaveGameReader reader = new SaveGameReader();
             List<Player> players = reader.ParseFile(path);
-            Formation formation = new Formation();
             foreach (Player player in players)
             {
                 player.ComputeScores(formation);

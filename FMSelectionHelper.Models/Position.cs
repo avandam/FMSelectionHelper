@@ -6,6 +6,7 @@ namespace FMSelectionHelper.Models
         public PositionType PositionType { get; }
 
         private readonly List<Role> possibleRoles;
+        public List<Role> PossibleRoles => possibleRoles;
 
         public Position(PositionType positionType, List<Role> possibleRoles)
         {

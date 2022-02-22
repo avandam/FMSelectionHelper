@@ -175,6 +175,9 @@ namespace FMSelectionHelper.Models
             return positions.First(position => position.PositionType == positionType);
         }
 
-
+        public List<Position> GetPositions()
+        {
+            return positions;
+        }
     }
 }

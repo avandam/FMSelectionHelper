@@ -1,0 +1,11 @@
+GK|Goalkeeper|Defend
+DL|WingBack|Support
+DCL|CentralDefender|Defend
+DCR|CentralDefender|Defend
+DR|WingBack|Support
+MCL|DeepLyingPlaymaker|Support
+MCR|BoxToBoxMidfielder|Support
+AML|InsideForward|Attack
+AMC|ShadowStriker|Attack
+AMR|InsideForward|Support
+ST|AdvancedForward|Attack

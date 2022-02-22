@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,10 +19,20 @@ namespace FMSelectionHelper
         private string sortPosition = string.Empty;
         private readonly PlayerService playerService = new PlayerService();
         private List<Player> players = new List<Player>();
+        private List<Formation> formations = new List<Formation>();
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = players;
+            FindAvailableFormations();
+        }
+
+        private void FindAvailableFormations()
+        {
+            FormationService service = new FormationService();
+            this.formations = service.GetFormations();
+            CmbFormations.ItemsSource = formations;
+            CmbFormations.SelectedIndex = 0;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -31,7 +42,7 @@ namespace FMSelectionHelper
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 if (openFileDialog.ShowDialog() == true)
                 {
-                    players = playerService.GetPlayersFromSquad(openFileDialog.FileName);
+                    players = playerService.GetPlayersFromSquad(openFileDialog.FileName, CmbFormations.SelectedItem as Formation);
                     PlayersView.ItemsSource = players;
                     for (int i = 0; i < 11; i++)
                     {
@@ -70,6 +81,12 @@ namespace FMSelectionHelper
             int index = Convert.ToInt32(sortBy.Substring(3));
             var orderedPlayers = players.OrderByDescending(player => player.GetRoleScore(index)).ToList();
             PlayersView.ItemsSource = orderedPlayers;
+        }
+
+        private void Btn_FormationManager_OnClick(object sender, RoutedEventArgs e)
+        {
+            FormationManager manager = new FormationManager();
+            manager.Show();
         }
     }
 }

@@ -1,0 +1,10 @@
+GK -> Goalkeeper, Sweeper Keeper
+DL/R -> Full-Back, No-Nonsense Full-Back, Wing-Back, Complete Wing-Back, Inverted Wing-Back
+WB L/R -> Wing-Back, Complete Wing-Back, Inverted Wing-Back
+DC -> No-Nonsense Centre-Back, Central Defender, Ball Playing Defender, Wide Centre-Back
+DM -> Anchor, Defensive Midfielder, Half Back, Ball Winning Midfielder, Segundo Volante, Deep Lying Playmaker, Regista, Roaming Playmaker
+ML/MR -> Winger, Inverted Winger, Wide Playmaker, Defensive Winger, Wide Midfielder
+MC -> Mezzala, Advanced Playmaker, Central Midfielder, Roaming Playmaker, Deep Lying Plamaker, Box to Box Midfielder, Carrilero, Ball Winning Midfielder, 
+AML/R -> Winger, Inverted Winger, Inside Forward, Advanced Playmaker, Trequartista, Raumdeuter, Wide Target Forward
+AMC -> Shadow Striker, Attacking Midfielder, Advanced Playmaker, Trequartista, Enganche
+ST -> Advanced Forward, Poacher, False Nine, Complete Forward, Trequartista, Deep Lying Forward, Pressing Forward, Target Forward 
