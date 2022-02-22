@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FMSelectionHelper.Models
+﻿namespace FMSelectionHelper.Models
 {
     public class Formation
     {
@@ -32,7 +26,7 @@ namespace FMSelectionHelper.Models
         {
             if (position.Index < 0 || position.Index > 10)
             {
-                throw new ArgumentOutOfRangeException("position", "Index in formation should be between 0 and 10");
+                throw new ArgumentOutOfRangeException(nameof(position.Index), "Index in formation should be between 0 and 10");
             }
             if (selection.Any(selectionItem => selectionItem.Index == position.Index))
             {

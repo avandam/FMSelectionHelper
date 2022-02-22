@@ -42,7 +42,7 @@ namespace FMSelectionHelper.Models
             RoleScores.Clear();
             foreach (var position in formation.Selection)
             {
-                if (CanPlayAtPosition(position.Role.RoleType))
+                if (CanPlayAtPosition(position.Position.PositionType))
                 {
                     RoleScores.Add(new RoleScore(position, attributes));
                 }
@@ -55,17 +55,9 @@ namespace FMSelectionHelper.Models
             GlobalScore = Math.Round(attributes.Average(attribute => attribute.Value), 2);
         }
 
-        private bool CanPlayAtPosition(RoleType roleType)
+        private bool CanPlayAtPosition(PositionType positionType)
         {
-            foreach (var position in positions)
-            {
-                if (position.IsRoleValid(roleType))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return positions.Any(position => position.PositionType == positionType);
         }
     }
 }
