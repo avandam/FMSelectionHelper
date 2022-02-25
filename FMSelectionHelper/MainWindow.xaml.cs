@@ -78,8 +78,18 @@ namespace FMSelectionHelper
             }
 
             sortPosition = sortBy;
-            int index = Convert.ToInt32(sortBy.Substring(3));
-            var orderedPlayers = players.OrderByDescending(player => player.GetRoleScore(index)).ToList();
+            List<Player>? orderedPlayers = null;
+
+            if (sortPosition == "Total")
+            {
+                orderedPlayers = players.OrderByDescending(player => player.GlobalScore).ToList();
+            }
+            else
+            {
+                int index = Convert.ToInt32(sortBy.Substring(3));
+                orderedPlayers = players.OrderByDescending(player => player.GetRoleScore(index)).ToList();
+            }
+
             PlayersView.ItemsSource = orderedPlayers;
         }
 

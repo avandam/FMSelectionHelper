@@ -89,7 +89,7 @@
                     </GridViewColumn>
                     <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=GlobalScore}">
                         <GridViewColumn.Header>
-                            <GridViewColumnHeader Click="PlayersViewColumnHeader_Click" ToolTip="Average over all attributes">Total</GridViewColumnHeader>
+                            <GridViewColumnHeader Tag="Total" Click="PlayersViewColumnHeader_Click" ToolTip="Average over all attributes">Total</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
                 </GridView>
